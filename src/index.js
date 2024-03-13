@@ -5,12 +5,12 @@ function updateWeather(response) {
   let descriptionElement = document.querySelector("#description");
   let description = response.data.condition.description;
   let humidityElement = document.querySelector("#humidity-value");
-  console.log(response.data);
   let humidity = response.data.temperature.humidity;
   let windElement = document.querySelector("#wind-value");
   let wind = response.data.wind.speed;
   let timeElement = document.querySelector("#time");
   let date = new Date(response.data.time * 1000);
+  let iconElement = document.querySelector("#icon");
 
   cityElement.innerHTML = response.data.city;
   descriptionElement.innerHTML = response.data.condition.description;
@@ -18,6 +18,10 @@ function updateWeather(response) {
   temperatureElement.innerHTML = Math.round(temperature);
   windElement.innerHTML = Math.round(wind);
   timeElement.innerHTML = formatDate(date);
+  iconElement.innerHTML = ` <img
+              class="weather-app-icon"
+              src="${response.data.condition.icon_url}"
+            />`;
 }
 
 function formatDate(date) {

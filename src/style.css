@@ -83,7 +83,8 @@ strong {
   margin-top: 15px;
 }
 .weather-app-icon {
-  font-size: 37px;
-  margin-top: 25px;
-  margin-right: 6px;
+  width: 80px;
+  margin-bottom: 27px;
+  margin-right: -3px;
+  margin-top: 8px;
 }
