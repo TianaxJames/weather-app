@@ -47,7 +47,6 @@ function formatDate(date) {
 function searchCity(city) {
   let apiKey = "4e8o5847ea5bt28f13d011c45acd0fe9";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
-  console.log(apiUrl);
   axios.get(apiUrl).then(updateWeather);
 }
 
