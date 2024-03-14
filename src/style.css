@@ -89,19 +89,20 @@ strong {
   margin-top: 8px;
 }
 
-.weather-forecast-container {
+.weather-forecast {
   margin-top: 20px;
-  text-align: center;
+  display: flex;
+  margin-left: 57px;
 }
 
-.col-2 {
+.weather-forecast-day {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 200px;
 }
 
-.col-2 img {
+.weather-forecast-day img {
   margin-left: -14px;
 }
 
@@ -111,7 +112,7 @@ strong {
   opacity: 0.5;
 }
 
-.weather-forecast-temp {
+.weather-forecast-temps {
   margin-left: -3px;
   font-size: 13px;
 }
