@@ -22,6 +22,7 @@ function updateWeather(response) {
               class="weather-app-icon"
               src="${response.data.condition.icon_url}"
             />`;
+  getForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -47,7 +48,7 @@ function formatDate(date) {
 function searchCity(city) {
   let apiKey = "4e8o5847ea5bt28f13d011c45acd0fe9";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
-  axios.get(apiUrl).then(updateWeather);
+  axios(apiUrl).then(updateWeather);
 }
 
 function handleSearchSubmit(event) {
@@ -56,34 +57,46 @@ function handleSearchSubmit(event) {
 
   searchCity(searchInput.value);
 }
-function displayForecast() {}
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+  return days[date.getDay()];
+}
 
-let days = ["Tues", "Wed", "Thur", "Fri", "Sat"];
-let forecastHtml = "";
+function getForecast(city) {
+  let apiKey = "4e8o5847ea5bt28f13d011c45acd0fe9";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=imperial`;
+  axios(apiUrl).then(displayForecast);
+}
 
-days.forEach(function (day) {
-  forecastHtml =
-    forecastHtml +
-    `
+function displayForecast(response) {
+  let forecastHtml = "";
+
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHtml =
+        forecastHtml +
+        `
     <div class="weather-forecast-day"> 
-    <div class="weather-forecast-date">${day}</div>
-    <img
-    src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-day.png"
-    alt=""
-    width="60px"
-    /> 
+    <div class="weather-forecast-date">${formatDay(day.time)}</div>
+    <img class="weather-forecast-icon"  src="${day.condition.icon_url}"/> 
     <div class="weather-forecast-temps">
-    <span class="weather-forecast-temp-max"><strong>18°</strong></span> <span class="weather-forecast-temp-min"><strong>13°</strong></span>
+    <span class="weather-forecast-temp-max"><strong>${Math.round(
+      day.temperature.maximum
+    )}°</strong></span> <span class="weather-forecast-temp-min"><strong>${Math.round(
+          day.temperature.minimum
+        )}°</strong></span>
     </div>
     </div>
     `;
-});
+    }
+  });
 
-let forecastElement = document.querySelector("#forecast");
-forecastElement.innerHTML = forecastHtml;
-
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Montreal");
-displayForecast();
+getForecast("Montreal");

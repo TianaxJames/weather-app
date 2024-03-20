@@ -1,10 +1,15 @@
 body {
   background-color: rgb(237, 235, 235);
+  background-image: url("https://i.pinimg.com/originals/72/0a/39/720a39e5d575c44eaecfe74a513afa27.jpg");
+  background-size: 100vw 100vh;
+  margin: 8px;
+  display: block;
 }
 
 header {
   border-bottom: 1px solid rgb(224, 237, 245);
   padding: 0 0 30px 0;
+  display: block;
 }
 main {
   padding: 30px 0;
@@ -92,24 +97,25 @@ strong {
 .weather-forecast {
   margin-top: 20px;
   display: flex;
-  margin-left: 57px;
+  margin-left: -3px;
 }
 
 .weather-forecast-day {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 200px;
-}
-
-.weather-forecast-day img {
-  margin-left: -14px;
 }
 
 .weather-forecast-date {
   font-size: 16px;
   color: black;
   opacity: 0.5;
+}
+
+.weather-forecast-icon {
+  width: 78px;
+  height: 78px;
 }
 
 .weather-forecast-temps {
